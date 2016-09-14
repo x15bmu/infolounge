@@ -89,12 +89,92 @@ function handlePredictions(data) {
     $("#predictions").html(elem);
 }
 
+function sortTime(list) {
+    list.sort((a, b) => {
+        if (a.minutes > b.minutes) {
+            return 1;
+        } else if (a.minutes < b.minutes) {
+            return -1;
+        }
+        return 0;
+    });
+}
+
+function timeFormat(mins) {
+    if (mins >= 60) {
+        let hours = Math.floor(mins / 60);
+        mins = mins % 60;
+        return hours + 'h ' + mins + 'm';
+    } else {
+        return mins + 'm';
+    }
+}
+
+function buildHtml(trains) {
+    let walkTime = 6;
+    trains = trains.filter((e) => e.minutes >= walkTime);
+
+    if (trains.length === 0) {
+        return '<div class="bart-time">None</div>';
+    }
+    let html = '<div class="bart-time">' + timeFormat(trains[0].minutes) + '</div>'
+    let leaveTime = trains[0].minutes - walkTime;
+    if (leaveTime === 0) {
+        html += '<div class="bart-leave-time">Leave now</div>';
+    } else {
+        html += '<div class="bart-leave-time">Leave in ' + timeFormat(leaveTime) + '</div>';
+    }
+
+    if (trains.length > 1) {
+        html += '<br /><div class="bart-later">Later ';
+        html += timeFormat(trains[1].minutes);
+        if (trains.length > 2) {
+            html += ', ' + timeFormat(trains[2].minutes);
+        }
+        if (trains.length > 3) {
+            html += ', ' + timeFormat(trains[3].minutes);
+        }
+        html += '</div>';
+    }
+    return html;
+}
+
+function handleBart(xml) {
+    let toNorth = [];
+    let toAirport = [];
+    $(xml).find('etd').each((i, destination) => {
+        $(destination).find('estimate').each((j, estimate) => {
+            let est = $(estimate);
+            let obj = {};
+            obj.minutes = parseInt(est.find('minutes').text());
+            obj.destination = $(destination).find('destination').text();
+            obj.direction = est.find('direction').text();
+            obj.abbr = $(destination).find('abbreviation').text();
+            obj.color = est.find('color').text();
+            if (obj.direction === 'North') {
+                toNorth.push(obj);
+            } else if (obj.abbr === 'SFIA' || (obj.abbr === 'MLBR' && obj.color === 'YELLOW')) {
+                toAirport.push(obj);
+            }
+        });
+    });
+
+    sortTime(toNorth);
+    sortTime(toAirport);
+
+    $('#inbound-bart').html(buildHtml(toNorth));
+    $('#outbound-bart').html(buildHtml(toAirport));
+}
+
 
 function getPredictions() {
-    $.getJSON(predictionsTEK, handlePredictions2);
-    $.getJSON(predictionsSFBOS, handlePredictions);
-    $.getJSON(predictionsCT2N, handlePredictions);
-    $.getJSON(predictionsCT2S, handlePredictions);
+    // Old techshuttle stuff
+    // $.getJSON(predictionsTEK, handlePredictions2);
+    // $.getJSON(predictionsSFBOS, handlePredictions);
+    // $.getJSON(predictionsCT2N, handlePredictions);
+    // $.getJSON(predictionsCT2S, handlePredictions);
+    // TODO get API key
+    $.get('http://api.bart.gov/api/etd.aspx?cmd=etd&orig=24th&key=MW9S-E7SL-26DU-VV8V', handleBart);
 };
 
 if (elem.length == 0) {

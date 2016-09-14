@@ -24,7 +24,7 @@ function getMenu() {
                 document.getElementById("menu").innerHTML += menuCache[query];
             } else {
                 /* Note: DO NOT COPY THIS LINE AND USE IT IN OTHER CODE. IT USES MY PERSONAL GOOGLE API KEY. ~kyc */
-                $.getScript("https://www.googleapis.com/customsearch/v1?key=AIzaSyAngKp74bHK-MZDJZ0E153KVTF0NuzBSrE&cx=013902053734636094783:5ckniww7ndi&q=" + encodeURIComponent(query) + "&callback=menuHandler&searchType=image");
+                // $.getScript("https://www.googleapis.com/customsearch/v1?key=AIzaSyAngKp74bHK-MZDJZ0E153KVTF0NuzBSrE&cx=013902053734636094783:5ckniww7ndi&q=" + encodeURIComponent(query) + "&callback=menuHandler&searchType=image");
             }
         }
     });
