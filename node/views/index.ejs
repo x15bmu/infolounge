@@ -25,7 +25,8 @@
     <script src="/javascripts/fancy.js"></script>
     <script src="/javascripts/alerts.js"></script>
     <script src="/javascripts/img.js"></script>
-    <script src="/javascripts/webcam.js"></script>
+    <!-- <script src="/javascripts/webcam.js"></script> -->
+    <script src="/javascripts/chores.js"></script>
   	
 <script type='text/javascript'>
     lastUpdated = -1;
@@ -151,10 +152,14 @@
               getAlerts();
               getPredictions();
               getMenu();
-              getNews();
-              getImg();
+              // getImg();
+              getChores();
           }
       }, 1000);
+
+      setInterval(getNews, 1000*60*10);
+      getNews();
+
 
       $("#tweetpanel").delay(600).slideDown("slow");
 
@@ -240,6 +245,14 @@
             </div>
           </div>
           <div class="row">
+	        	<div class="large-12 columns">
+	          	<div id='newspanel' class='panel'>
+	              <h3 class="news-header">News</h3>
+	              <div id="news"></div>
+	          	</div>
+	       	 	</div>  
+	      	</div>
+          <!-- <div class="row">
             <div class="large-12 columns" id='tweetpanel'>
               <h3 class='news-header'>News</h3>
               <div  class='panel'>
@@ -252,12 +265,9 @@
 		</div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="large-5 columns">
-
-
-
           <div class="row">
             <div class="large-12 columns" id='datepanel' >
               <h3 class="date-header">Today</h3>
@@ -294,6 +304,24 @@
               </div>
             </div>  
           </div>
+
+          <div class="row">
+            <div class="large-12 columns" id='chorespanel'>
+              <h3 class='chores-header'>Cleaning</h3>
+              <div class='panel'>
+                <div class='row'>
+                  <div class="large-6 column chores-column">
+                    <h4 class="chores-item-header">Floors &amp Counters</h4>
+                    <div id="chores-house-assignee"></div>
+                  </div>
+                  <div class="large-6 column chores-column">
+                    <h4 class="chores-item-header">Bathrooms</h4>
+                    <div id="chores-bathrooms-assignee"></div>
+                  </div>
+                </div>
+              </div>
+            </div>  
+          </div>
 <!--
           <div class="row">
             <div class="large-12 columns" id='imgpanel'>
@@ -304,14 +332,14 @@
             </div>  
           </div>
 -->    
-          <div class="row">
+          <!-- <div class="row">
             <div class="large-12 columns" id="minecraftpanel">
               <h3 class='minecraft-header'>Current Crafters</h3>
               <div class='panel minecraft'>
               	
               </div>
             </div>  
-          </div>          
+          </div>   -->        
 <!--
           <div class="row">
             <div class="large-12 columns" id='webcampanel'>
@@ -324,16 +352,6 @@
           -->
           
         </div>
-        <!--
-          <div class="row">
-            <div class="large-12 columns">
-              <div id='newspanel' class='panel'>
-                  <h3>Lounge News</h3>
-                  <div id="news"></div>
-              </div>
-            </div>  
-          </div>
-        -->
       </div>
     </div>
 

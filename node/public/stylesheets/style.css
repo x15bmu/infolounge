@@ -162,6 +162,24 @@ b{
 	font-weight: 200;
 }
 
+.chores-header{
+	background-color: #CC38F5;
+}
+
+.chores-column {
+	text-align: center;
+}
+
+.chores-item-header {
+	font-size: 24px;
+	font-weight: 300;
+}
+
+.chores-assignee {
+	font-size: 60px;
+	font-weight: 600;
+}
+
 .fancy-header{
 	background-color: #CC38F5;
     /* background-color: #88D1ED; */
@@ -307,7 +325,29 @@ ul.jta-tweet-list li a{
 
 #news{
     font-size: 28px;
+    margin-top: 10px;
 }
+
+.news-image {
+	float: left;
+	width: 75px;
+}
+
+.news-body {
+	margin-left: 90px;
+}
+
+.news-wrapper h4 {
+	font-size: 14pt;
+}
+
+.news-wrapper p {
+	font-size: 12pt;
+	font-weight: 100;
+	color: #cccccc;
+}
+
+
 
 
 @keyframes blink {  
