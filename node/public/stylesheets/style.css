@@ -328,9 +328,23 @@ ul.jta-tweet-list li a{
     margin-top: 10px;
 }
 
+#news-progress-wrapper {
+	position: relative;
+	width: 100%;
+	height: 10px;
+}
+
+#news-progress-bar {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #aaa;
+}
+
 .news-image {
 	float: left;
-	width: 75px;
+	width: 125px;
+	margin-right: 10px;
 }
 
 .news-body {
@@ -338,11 +352,11 @@ ul.jta-tweet-list li a{
 }
 
 .news-wrapper h4 {
-	font-size: 14pt;
+	font-size: 20pt;
 }
 
 .news-wrapper p {
-	font-size: 12pt;
+	font-size: 14pt;
 	font-weight: 100;
 	color: #cccccc;
 }
