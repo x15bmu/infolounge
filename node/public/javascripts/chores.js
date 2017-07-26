@@ -1,6 +1,6 @@
-var startDate = new Date(2016, 10-1, 31);
-var house = ['Ben', 'Angie', 'Nayeon', 'Saya'];
-var bathroom = ['Nayeon', 'Saya', 'Angie'];
+var startDate = new Date(2017, 2-1, 13);
+var house = ['Ben', 'Denis', 'Nayeon', 'Lef', 'Saya'];
+var bathroom = ['Nayeon', 'Saya', 'Denis', 'Lef'];
 
 function getChores() {
 	var weeks = Math.floor((getChoresDate()-startDate) / 604800000);

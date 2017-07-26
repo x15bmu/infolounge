@@ -1,3 +1,5 @@
+'use strict';
+
 var predictionsTEK = "http://proximobus.appspot.com/agencies/mit/stops/51/predictions.json";
 	// tech shuttle and saferide cambridge, at tang/westgate
 
