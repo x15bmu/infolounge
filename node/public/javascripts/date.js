@@ -3,10 +3,10 @@ function getDate() {
     var now = new Date();
 
     var people = [
-	['Benji', 'January 21, 1994 00:00:00'],
 	['Nayeon', 'December 7, 1993 00:00:00'],
 	['Angie', 'January 25, 1992 00:00:00'],
-	['Saya', 'September 2, 1993 00:00:00']
+	['Saya', 'September 2, 1993 00:00:00'],
+	['Lef', 'January 20, 1992 00:00:00']
     ];
 
     var dict = [];
