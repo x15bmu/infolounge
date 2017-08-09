@@ -10,6 +10,8 @@ var newsData = [];
 var newsKeys = ["02c48d6f3e1348118d4e14cccaaaaff8", "4bf03033990448a482ff36bb85f424a6"];
 var newsKeyCounter = 0;
 
+// TODO - investigate this: https://newsapi.org/associated-press-api
+
 function progressBar() {
 	var pct = (Date.now() - newsStartTime)/newsChangeTime * 100;
 	if (pct > 100) {
