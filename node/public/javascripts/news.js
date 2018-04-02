@@ -7,7 +7,7 @@ var newsStartTime = Date.now();
 var newsTimeout = null;
 var newsData = [];
 
-var newsKeys = ["02c48d6f3e1348118d4e14cccaaaaff8", "4bf03033990448a482ff36bb85f424a6"];
+var newsKeys = ["c596bf73853a4e02a2a742d7166c37c7", "ecceeaafd7b84c0ca84f2df8fa192e1a"];
 var newsKeyCounter = 0;
 
 // TODO - investigate this: https://newsapi.org/associated-press-api
@@ -32,7 +32,7 @@ function getNews() {
 		"safeSearch": "Moderate",
 	};
 	$.ajax({
-		url: "https://api.cognitive.microsoft.com/bing/v5.0/news/search?" + $.param(params),
+		url: "https://api.cognitive.microsoft.com/bing/v7.0/news/search?" + $.param(params),
 		beforeSend: function(xhrObj){
 			// Request headers
 			var key = newsKeys[newsKeyCounter];

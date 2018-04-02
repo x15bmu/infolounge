@@ -16,7 +16,8 @@ function getMenu(req, res) {
         };
 
         now = new Date();
-        var date = dateformat.dateFormat(now, 'dddd, mmmm dS, yyyy');
+        //var date = dateformat.dateFormat(now, 'dddd, mmmm dS, yyyy');
+        var date = now.format('dddd, mmmm dS, yyyy');
         var dateIndex = body.indexOf(date);
         if (dateIndex == -1) {
             res.json({});
