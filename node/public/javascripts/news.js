@@ -1,4 +1,4 @@
-var newsURL = 'https://api.cognitive.microsoft.com/bing/v5.0/news/search?q=headline&count=10&offset=0&mkt=en-us&safeSearch=Moderate';
+var newsURL = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=bfa9eb24ff4d488c9cd9843a9dc5a785';
 var newsOffset = 0;
 var newsCount = 3;
 var newsGroupCount = 3;
@@ -7,10 +7,7 @@ var newsStartTime = Date.now();
 var newsTimeout = null;
 var newsData = [];
 
-var newsKeys = ["c596bf73853a4e02a2a742d7166c37c7", "ecceeaafd7b84c0ca84f2df8fa192e1a"];
-var newsKeyCounter = 0;
-
-// TODO - investigate this: https://newsapi.org/associated-press-api
+var newsKey = 'bfa9eb24ff4d488c9cd9843a9dc5a785';
 
 function progressBar() {
 	var pct = (Date.now() - newsStartTime)/newsChangeTime * 100;
@@ -25,25 +22,16 @@ function getNews() {
 	clearTimeout(newsTimeout);
 	var params = {
 		// Request parameters
-		"q": "headline",
-		"count": newsCount * newsGroupCount,
-		"offset": newsOffset,
-		"mkt": "en-us",
-		"safeSearch": "Moderate",
+		"country": "us",
+		"pageSize": newsCount * newsGroupCount,
+		"apiKey": newsKey,
 	};
 	$.ajax({
-		url: "https://api.cognitive.microsoft.com/bing/v7.0/news/search?" + $.param(params),
-		beforeSend: function(xhrObj){
-			// Request headers
-			var key = newsKeys[newsKeyCounter];
-			newsKeyCounter++;
-			newsKeyCounter %= newsKeys.length;
-			xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", key);
-		},
+		url: 'https://newsapi.org/v2/top-headlines?' + $.param(params),
 		type: "GET",
 	})
 	.done(function(data) {
-		newsData = data.value;
+		newsData = data.articles;
 		resultsFunc();
 	});
 }
@@ -55,13 +43,10 @@ function resultsFunc() {
 	$('.new-news-group').removeClass('new-news-group');
 	lines.push('<div class="new-news-group">');
 	for (var n of news) {
-		n.name;
-		n.description;
-		n.image.thumbnail.contentUrl;
 		var line = '';
 		line += '<div class="news-wrapper">'
-		line += '<img src="' + n.image.thumbnail.contentUrl + '" class="news-image">';
-		line += '<div class="news-body"><h4>' + n.name + '</h4><p>' + n.description + '</div>';
+		line += '<div class="news-image"><img src="' + n.urlToImage + '"></div>';
+		line += '<div class="news-body"><h4>' + n.title + '</h4><p>' + n.description + '</div>';
 		line += '</div><br style="clear: both;" />';
 		lines.push(line);
 	}
@@ -69,7 +54,7 @@ function resultsFunc() {
 	$("#newspanel").slideDown("slow");
 	$("#news").append(lines.join('\n'));
 	newsOffset += newsCount;
-	if (newsOffset >= newsGroupCount*newsCount) {
+	if (newsOffset >= newsCount * newsGroupCount) {
 		newsOffset = 0;
 	}
 	$('.old-news-group').slideUp('slow', function() {

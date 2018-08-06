@@ -342,13 +342,17 @@ ul.jta-tweet-list li a{
 }
 
 .news-image {
-	float: left;
-	width: 125px;
+  flex: 0 0 auto;
 	margin-right: 10px;
+  width: 125px;
+}
+
+.news-wrapper {
+  display: flex;
 }
 
 .news-body {
-	margin-left: 90px;
+  flex: 1 1 auto;
 }
 
 .news-wrapper h4 {
@@ -360,8 +364,6 @@ ul.jta-tweet-list li a{
 	font-weight: 100;
 	color: #cccccc;
 }
-
-
 
 
 @keyframes blink {  
